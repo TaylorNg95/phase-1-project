@@ -3,6 +3,7 @@ let counter = 0
 
 let drinksArray = []
 let ingredientsArray = []
+let userIngredients = []
 
 /* document.addEventListener('DOMContentLoaded', function(){
     fetchAllDrinks('a')
@@ -121,22 +122,28 @@ function renderIngredient(ingredient){
 }
 
 function addEvents(btn){
-    btn.addEventListener('mouseover', function(event){
-        event.target.style.color = '#ffffff';
-        event.target.style.backgroundColor = '#0d6efd';
+    btn.addEventListener('mouseover', function(){
+        this.style.color = '#ffffff';
+        this.style.backgroundColor = '#0d6efd';
     })
-    btn.addEventListener('mouseout', function(event){
-        if(!event.target.classList.contains('selected')){
-            event.target.style.color = '#0d6efd';
-            event.target.style.backgroundColor = '#ffffff';
+    btn.addEventListener('mouseout', function(){
+        if(!this.classList.contains('selected')){
+            this.style.color = '#0d6efd';
+            this.style.backgroundColor = '#ffffff';
         }
     })
     btn.addEventListener('click', function(event){
-        event.target.classList.toggle('selected')
+        this.classList.toggle('selected')
+        /* debugger */
+        if(this.classList.contains('selected')){
+            userIngredients.push(this.dataset.name)
+        } else {
+            /* debugger */
+            const savedIngredient = userIngredients.indexOf(this.dataset.name)
+            delete userIngredients[savedIngredient] // probably revise this so it doesn't return empty
+        }
 
     })
 }
 
-document.querySelectorAll('button').forEach(button => {
-    button.addEventListener('mouseover', () => button.toggleAttribute('class', 'hover'))
-})
+/* document.querySelector('#make-me-drinks').addEventListener('submit') */
