@@ -64,24 +64,31 @@ function fetchAllDrinks(letter){
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`)
         .then(response => response.json())
         .then(data => {
-            if(data.drinks !== null){
-                drinksArray = drinksArray.concat(data.drinks)
-            }
-            if(counter < 25){
-                const newLetter = alphabet[counter + 1]
-                if(newLetter !== undefined){
-                    fetchAllDrinks(newLetter)
-                }
-                counter++
-            } else {
-                drinksArray.forEach(drink => {
-                    keepIngredients(drink)
-                })
-                ingredientsArray.sort()
-                console.log(ingredientsArray)
-            }
+            populateDrinksArray(data)
+            console.log(ingredientsArray)
         }
     )
+}
+
+function populateDrinksArray(data){
+    if(data.drinks !== null){
+        drinksArray = drinksArray.concat(data.drinks)
+    }
+    if(counter < 25){
+        const newLetter = alphabet[counter + 1]
+        if(newLetter !== undefined){
+            fetchAllDrinks(newLetter)
+        }
+        counter++
+    } else {
+        drinksArray.forEach(drink => {
+            keepIngredients(drink)
+        })
+    }
+    ingredientsArray.sort()
+    ingredientsArray.forEach(ingredient => {
+        renderIngredient(ingredient)
+    })
 }
 
 function keepIngredients(drink){
@@ -105,4 +112,10 @@ function udpateIngredientsArray(ingredient){
     }
 }
 
+function renderIngredient(ingredient){
+    const btn = document.createElement('button')
+    btn.dataset.name = ingredient
+    btn.textContent = ingredient
+    document.querySelector('#data').appendChild(btn)
+}
 
