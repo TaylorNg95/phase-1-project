@@ -65,7 +65,7 @@ function fetchAllDrinks(letter){
         .then(response => response.json())
         .then(data => {
             if(data.drinks !== null){
-                ingredientsArray = ingredientsArray.concat(data.drinks)
+                drinksArray = drinksArray.concat(data.drinks)
             }
             if(counter < 25){
                 const newLetter = alphabet[counter + 1]
@@ -74,9 +74,11 @@ function fetchAllDrinks(letter){
                 }
                 counter++
             } else {
-                ingredientsArray.forEach(drink => {
+                drinksArray.forEach(drink => {
                     keepIngredients(drink)
                 })
+                ingredientsArray.sort()
+                console.log(ingredientsArray)
             }
         }
     )
@@ -84,18 +86,23 @@ function fetchAllDrinks(letter){
 
 function keepIngredients(drink){
     const {strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15} = drink
-    const ingredients = {strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15}
-    console.log(ingredients)
-    /* let counter = 1
-    const maxIngredients = 15
-    let ingredientQuery = `strIngredient${counter}`
+    const ingredientsObj = {strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15}
+    Object.keys(ingredientsObj).forEach(ingredient => {
+        if(!ingredientsObj[ingredient]){
+            delete ingredientsObj[ingredient]
+        }
+    })
+    const ingredientsArray = Object.values(ingredientsObj)
+    ingredientsArray.forEach(ingredient => {
+        udpateIngredientsArray(ingredient)
+    })
+}
 
-    while(counter <= maxIngredients){
-        console.log(drink[ingredientQuery])
-        counter++
-    } */
-
-    /* console.log(drink[`${maxIngredients}`]) */
+function udpateIngredientsArray(ingredient){
+    const foundValue = ingredientsArray.find(item => item.toLowerCase() === ingredient.toLowerCase())
+    if (!foundValue) {
+        ingredientsArray.push(ingredient)
+    }
 }
 
 
