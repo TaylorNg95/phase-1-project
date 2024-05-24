@@ -1,0 +1,21 @@
+body {
+    margin: 2px;
+}
+
+button {
+    margin: 2px;
+    border: solid 2px #0d6efd;
+    color: #0d6efd;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+}
+
+.hover {
+    color: #FFFFFF;
+    background: #0d6efd;
+}
+
+.selected {
+    color: #FFFFFF;
+    background: #0d6efd;
+}

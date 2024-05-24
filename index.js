@@ -65,7 +65,7 @@ function fetchAllDrinks(letter){
         .then(response => response.json())
         .then(data => {
             populateDrinksArray(data)
-            console.log(ingredientsArray)
+            /* console.log(ingredientsArray) */ // WHY DOES THIS GET LOGGED EVERY TIME??
         }
     )
 }
@@ -116,6 +116,27 @@ function renderIngredient(ingredient){
     const btn = document.createElement('button')
     btn.dataset.name = ingredient
     btn.textContent = ingredient
-    document.querySelector('#data').appendChild(btn)
+    addEvents(btn)
+    document.querySelector('#btn-container').appendChild(btn)
 }
 
+function addEvents(btn){
+    btn.addEventListener('mouseover', function(event){
+        event.target.style.color = '#ffffff';
+        event.target.style.backgroundColor = '#0d6efd';
+    })
+    btn.addEventListener('mouseout', function(event){
+        if(!event.target.classList.contains('selected')){
+            event.target.style.color = '#0d6efd';
+            event.target.style.backgroundColor = '#ffffff';
+        }
+    })
+    btn.addEventListener('click', function(event){
+        event.target.classList.toggle('selected')
+
+    })
+}
+
+document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('mouseover', () => button.toggleAttribute('class', 'hover'))
+})
