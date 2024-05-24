@@ -59,6 +59,8 @@ function calcIngredientsArray(drinksArray){
     })
 }
 
+document.querySelector('#img-vodka').addEventListener('click', () => alert('Vodka!'))
+
 /* function renderAllDrinks(drinks){
     Array.from(drinks).forEach(drink => {
         console.log(drink)
