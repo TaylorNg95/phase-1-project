@@ -19,3 +19,7 @@ button {
     color: #FFFFFF;
     background: #0d6efd;
 }
+
+.hidden {
+    display: none
+}

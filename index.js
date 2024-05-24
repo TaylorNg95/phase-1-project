@@ -5,6 +5,9 @@ let drinksArray = []
 let ingredientsArray = []
 let userIngredients = []
 
+const btnContainer = document.querySelector('#btn-container')
+const drinksContainer = document.querySelector('#drinks-container')
+
 /* document.addEventListener('DOMContentLoaded', function(){
     fetchAllDrinks('a')
 })
@@ -118,7 +121,7 @@ function renderIngredient(ingredient){
     btn.dataset.name = ingredient
     btn.textContent = ingredient
     addEvents(btn)
-    document.querySelector('#btn-container').appendChild(btn)
+    btnContainer.appendChild(btn)
 }
 
 function addEvents(btn){
@@ -146,4 +149,8 @@ function addEvents(btn){
     })
 }
 
-/* document.querySelector('#make-me-drinks').addEventListener('submit') */
+document.querySelector('#make-me-drinks').addEventListener('click', function(event){
+    event.preventDefault()
+    btnContainer.classList.add('hidden')
+    drinksContainer.classList.remove('hidden')
+})
