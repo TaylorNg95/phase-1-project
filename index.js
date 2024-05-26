@@ -106,21 +106,27 @@ document.querySelector('#make-me-drinks').addEventListener('click', function(){
     drinksContainer.classList.remove('hidden')
 
     drinksArray.forEach(drink => {
-        let counter = 1
-        let drinkKey = `strIngredient${counter}`
-        let ingArray = []
         let status = true
-        while(counter <= 15){
-            if(drink[drinkKey] !== null){
-                ingArray.push(drink[drinkKey])
-            }
+        /* debugger */
+        let counter = 1
+        let drinkKey = 'strIngredient1'
+        let ingArray = []
+        while(counter <= 15 && drink[drinkKey] !== null){
+            ingArray.push(drink[drinkKey])
             counter++
+            drinkKey = `strIngredient${counter}`
         }
+        // Creates an array of ingredients for one drink in the database
         ingArray.forEach(ing => {
-            const search = userIngredients.find(userIng => userIng === ing)
-            if(search === undefined){status = false}
+            const search = userIngredients.find(userIng => userIng.toLowerCase() === ing.toLowerCase())
+            /* debugger */
+            // Takes each ingredient for that one drink, searches the userIngredients array for a match to that one drink
+            // As soon as an ingredient is not found, status is set to false
+            if(search === undefined){
+                status = false
+            }
         })
-        if(status === true){renderDrink(drink)} 
+        if(status === true){renderDrink(drink)} // THIS IS WHERE WE LEFT OFF
     })
 })
 
