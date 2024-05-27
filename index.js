@@ -118,13 +118,17 @@ function generateDrinkMatches(){
             counter++
             drinkKey = `strIngredient${counter}`
         }
+        debugger
         ingArray.forEach(ing => {
             const search = userIngredients.find(userIng => userIng.toLowerCase() === ing.toLowerCase())
             if(search === undefined){
                 status = false
             }
         })
-        if(status === true){renderDrink(drink, ingArray)}
+        if(status === true){
+            ingArray = ingArray.map(ing => ' ' + ing)
+            renderDrink(drink, ingArray)
+        }
     })
 }
 
@@ -137,7 +141,7 @@ function renderDrink(drink, ingArray){
             <img class="card-img-top" src=${drink.strDrinkThumb}>
             <div class="card-body">
                 <p class="card-text">${drink.strDrink}<button class='more-info-btn'>More Info</button></p>
-                <p class="card-text">Ingredients: ${ingArray}</p>
+                <p class="card-text">Ingredients:${ingArray}</p>
                 <p class="card-text">Instructions: ${drink.strInstructions}</p>
             </div>
         </div>
