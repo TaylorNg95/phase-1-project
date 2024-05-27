@@ -107,9 +107,7 @@ document.querySelector('#make-me-drinks').addEventListener('click', function(){
 })
 
 function generateDrinkMatches(){
-    debugger
     userIngredients = userIngredients.filter(element => element !== null)
-    debugger
     drinksArray.forEach(drink => {
         let status = true
         let counter = 1
@@ -145,5 +143,5 @@ function renderDrink(drink, ingArray){
         </div>
     `
     div.innerHTML = cardHTML
-    document.querySelector('.row').appendChild = div //START FROM HERE, WHY ARE DRINKS NOT RENDERING
+    document.querySelector('.row').appendChild(div)
 }
