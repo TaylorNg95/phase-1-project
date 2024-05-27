@@ -5,7 +5,6 @@ let counter = 0
 
 let drinksArray = []
 let ingredientsArray = []
-let userIngredients = []
 
 const btnContainer = document.querySelector('#btn-container')
 const cardsContainer = document.querySelector('.row')
@@ -90,15 +89,8 @@ function addEvents(btn){
             this.style.backgroundColor = '#ffffff';
         }
     })
-    btn.addEventListener('click', function(event){
+    btn.addEventListener('click', function(){
         this.classList.toggle('selected')
-        if(this.classList.contains('selected')){
-            userIngredients.push(this.dataset.name)
-        } else {
-            const savedIngredient = userIngredients.indexOf(this.dataset.name)
-            delete userIngredients[savedIngredient] // probably revise this so it doesn't return empty
-        }
-
     })
 }
 
@@ -112,31 +104,33 @@ document.querySelector('#make-me-drinks').addEventListener('click', function(){
 })
 
 function generateDrinkMatches(){
-    userIngredients = userIngredients.filter(element => element !== null)
+    const userIngredients = Array.from(document.querySelectorAll('.selected')).map(element => element.dataset.name)
     drinksArray.forEach(drink => {
         let status = true
         let counter = 1
         let drinkKey = 'strIngredient1'
-        let ingArray = []
+        let drinkIngArray = []
+        // Extract the ingredients for a single drink
         while(counter <= 15 && drink[drinkKey] !== null){
-            ingArray.push(drink[drinkKey])
+            drinkIngArray.push(drink[drinkKey])
             counter++
             drinkKey = `strIngredient${counter}`
         }
-        ingArray.forEach(ing => {
-            const search = userIngredients.find(userIng => userIng.toLowerCase() === ing.toLowerCase())
+        // See if each ingredient can be found in userIngredients - if yes, render the drink
+        drinkIngArray.forEach(ing => {
+            const search = userIngredients.find(userIng => userIng === ing)
             if(search === undefined){
                 status = false
             }
         })
         if(status === true){
-            ingArray = ingArray.map(element => ' ' + element)
-            renderDrink(drink, ingArray)
+            drinkIngArray = drinkIngArray.map(element => ' ' + element) // Adjust for spacing
+            renderDrink(drink, drinkIngArray)
         }
     })
 }
 
-function renderDrink(drink, ingArray){
+function renderDrink(drink, drinkIngArray){
     console.log(drink.strDrink)
     const div1 = document.createElement('div')
     const div2 = document.createElement('div')
@@ -158,12 +152,12 @@ function renderDrink(drink, ingArray){
     btn.className = 'more-info-btn'
     btn.textContent = 'More Info'
     p2.className = 'card-text hidden'
-    p2.textContent = `Ingredients:${ingArray}`
+    p2.textContent = `Ingredients:${drinkIngArray}`
     p3.className = 'card-text hidden'
     p3.textContent = `Instructions: ${drink.strInstructions}`
     btn.addEventListener('click', () => {
-      p2.classList.remove('hidden')
-      p3.classList.remove('hidden')  
+      p2.classList.toggle('hidden')
+      p3.classList.toggle('hidden')  
     })
 
     p1.append(btn)
