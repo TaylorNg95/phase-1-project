@@ -26,5 +26,9 @@ button {
 }
 
 .more-info-btn {
-    float: right
+    float: right;
+    padding: 2px;
+    border: solid 2px gray;
+    border-radius: 5px;
+    cursor: pointer;
 }

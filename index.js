@@ -7,6 +7,7 @@ let userIngredients = []
 
 const btnContainer = document.querySelector('#btn-container')
 const drinksContainer = document.querySelector('#drinks-container')
+const cardsContainer = document.querySelector('.row')
 
 document.addEventListener('DOMContentLoaded', function(){
     fetchAllDrinks('a')
@@ -118,7 +119,6 @@ function generateDrinkMatches(){
             counter++
             drinkKey = `strIngredient${counter}`
         }
-        debugger
         ingArray.forEach(ing => {
             const search = userIngredients.find(userIng => userIng.toLowerCase() === ing.toLowerCase())
             if(search === undefined){
@@ -134,18 +134,37 @@ function generateDrinkMatches(){
 
 function renderDrink(drink, ingArray){
     console.log(drink.strDrink)
-    const div = document.createElement('div')
-    div.className = 'col-4'
-    const cardHTML = `
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src=${drink.strDrinkThumb}>
-            <div class="card-body">
-                <p class="card-text">${drink.strDrink}<button class='more-info-btn'>More Info</button></p>
-                <p class="card-text">Ingredients:${ingArray}</p>
-                <p class="card-text">Instructions: ${drink.strInstructions}</p>
-            </div>
-        </div>
-    `
-    div.innerHTML = cardHTML
-    document.querySelector('.row').appendChild(div)
+    const div1 = document.createElement('div')
+    const div2 = document.createElement('div')
+    const img = document.createElement('img')
+    const div3 = document.createElement('div')
+    const p1 = document.createElement('p')
+    const btn = document.createElement('btn')
+    const p2 = document.createElement('p')
+    const p3 = document.createElement('p')
+
+    div1.className = 'col-4'
+    div2.className = 'card'
+    div2.style.width = '18rem'
+    img.className = 'card-img-top'
+    img.src = drink.strDrinkThumb
+    div3.className = 'card-body'
+    p1.className = 'card-text'
+    p1.textContent = drink.strDrink
+    btn.className = 'more-info-btn'
+    btn.textContent = 'More Info'
+    p2.className = 'card-text hidden'
+    p2.textContent = `Ingredients:${ingArray}`
+    p3.className = 'card-text hidden'
+    p3.textContent = `Instructions: ${drink.strInstructions}`
+    btn.addEventListener('click', () => {
+      p2.classList.remove('hidden')
+      p3.classList.remove('hidden')  
+    })
+
+    p1.append(btn)
+    div3.append(p1, p2, p3)
+    div2.append(img, div3)
+    div1.append(div2)
+    cardsContainer.appendChild(div1)
 }
