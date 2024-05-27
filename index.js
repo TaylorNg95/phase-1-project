@@ -102,6 +102,8 @@ function addEvents(btn){
     })
 }
 
+// Handle when a user submits the ingredients they have available, and find / render drink matches
+
 document.querySelector('#make-me-drinks').addEventListener('click', function(){
     this.classList.add('hidden')
     btnContainer.classList.add('hidden')
