@@ -3,13 +3,13 @@
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'
 let counter = 0
 
-let drinksArray = []
-let ingredientsArray = []
+let allDrinksArray = []
+let allIngredientsArray = []
 
 const btnContainer = document.querySelector('#btn-container')
 const cardsContainer = document.querySelector('.row')
 
-// Get all drink objects loaded into global variable drinksArray
+// Get all drink objects loaded into global variable allDrinksArray
 
 document.addEventListener('DOMContentLoaded', function(){
     fetchAllDrinks('a')
@@ -26,7 +26,7 @@ function fetchAllDrinks(letter){
 
 function populateDrinksArray(data){
     if(data.drinks !== null){
-        drinksArray = drinksArray.concat(data.drinks) // Contactenate drinksArray with drinks for each letter
+        allDrinksArray = allDrinksArray.concat(data.drinks) // Contactenate allDrinksArray with drinks for each letter
     }
     if(counter < 25){
         const newLetter = alphabet[counter + 1]
@@ -35,37 +35,33 @@ function populateDrinksArray(data){
         }
         counter++
     } else {
-        drinksArray.forEach(drink => {
-            extractIngredients(drink) // Once drinksArray fully loaded, extract ingredients from each drink object
+        allDrinksArray.forEach(drink => {
+            extractIngredients(drink) // Once allDrinksArray fully loaded, extract ingredients from each drink object
         })
     }
-    ingredientsArray = ingredientsArray.map(element => element[0].toUpperCase() + element.slice(1)) // Capitalize first letter to account for lowercase affecting alphabet sorting
-    ingredientsArray.sort() // Placed into alphabet order for easier user experience.
-    ingredientsArray.forEach(ingredient => {
+    debugger
+    allIngredientsArray = allIngredientsArray.map(element => element[0].toUpperCase() + element.slice(1)) // Capitalize first letter to account for lowercase affecting alphabet sorting
+    allIngredientsArray.sort() // Placed into alphabet order for easier user experience.
+    allIngredientsArray.forEach(ingredient => {
         renderIngredient(ingredient)
     })
 }
 
-/* The data.drinks !== null has to come first so that the Z drinks are loaded into the array. But then when
-counter < 25 condition is tested, it does not pass, which means that there are no more fetches made. This
-avoids a fetch call to undefined. REVIEW THIS  */
+/* The drinks array always gets populated first. The last time line 31 runs is when counter = 24 and therefore
+newLetter = alphabet[25], aka 'Z'. This ensures that the Z drinks get added to the new array, but then the
+function is not called again. Instead, the drinks array is complete and line 37 initiates ingredient
+extraction from every drink in the completed drinks array. */
 
-// There are a maximum of 15 ingredients per drink. Extract these are variables and create an ingredients Obj
-// for each drink.
+// Max of 15 ingredients per drink. Extract these as variables and create an ingredients Obj for each drink.
 
 function extractIngredients(drink){
     const {strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15} = drink
-    const ingredientsObj = {strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15}
-    Object.keys(ingredientsObj).forEach(ingredient => {
-        if(!ingredientsObj[ingredient]){
-            delete ingredientsObj[ingredient]
-        }
-    }) // TBD: CHANGE TO FILTER FN - FILTER OUT WHERE THERE ARE NULL VALUES SINCE MOST DON'T HAVE 15 INGREDIENTS
-    const drinkIngredientsArray = Object.values(ingredientsObj)
+    const drinkIngredientsObj = {strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15}
+    const drinkIngredientsArray = Object.values(drinkIngredientsObj).filter(element => element !== null && element !== '')
     drinkIngredientsArray.forEach(ingredient => {
-        const foundValue = ingredientsArray.find(item => item.toLowerCase() === ingredient.toLowerCase())
+        const foundValue = allIngredientsArray.find(item => item.toLowerCase() === ingredient.toLowerCase())
         if (!foundValue) {
-            ingredientsArray.push(ingredient)
+            allIngredientsArray.push(ingredient)
         } // TBD: CAN THIS BE MODIFIED INTO A MORE GENERAL FIND?
     })
 }
@@ -107,16 +103,20 @@ document.querySelector('#make-me-drinks').addEventListener('click', function(){
 
 function generateDrinkMatches(){
     const userIngredients = Array.from(document.querySelectorAll('.selected')).map(element => element.dataset.name)
-    drinksArray.forEach(drink => {
+    allDrinksArray.forEach(drink => {
         let status = true
         let counter = 1
-        let drinkKey = 'strIngredient1'
+        let drinkIngKey = 'strIngredient1'
+        let drinkMeasKey = 'strMeasure1'
         let drinkIngArray = []
-        // Extract the ingredients for a single drink
-        while(counter <= 15 && drink[drinkKey] !== null){
-            drinkIngArray.push(drink[drinkKey])
+        let drinkMeasArray = []
+        // Extract the ingredients and measurements for a single drink
+        while(counter <= 15 && drink[drinkIngKey] !== null){
+            drinkIngArray.push(drink[drinkIngKey])
+            drinkMeasArray.push(drink[drinkMeasKey])
             counter++
-            drinkKey = `strIngredient${counter}`
+            drinkIngKey = `strIngredient${counter}`
+            drinkMeasKey = `strMeasure${counter}`
         }
         // See if each ingredient can be found in userIngredients - if yes, render the drink
         drinkIngArray.forEach(ing => {
@@ -127,12 +127,13 @@ function generateDrinkMatches(){
         })
         if(status === true){
             drinkIngArray = drinkIngArray.map(element => ' ' + element) // Adjust for spacing
-            renderDrink(drink, drinkIngArray)
+            drinkMeasArray = drinkMeasArray.map(element => ' ' + element)
+            renderDrink(drink, drinkIngArray, drinkMeasArray)
         }
     })
 }
 
-function renderDrink(drink, drinkIngArray){
+function renderDrink(drink, drinkIngArray, drinkMeasArray){
     console.log(drink.strDrink)
     const div1 = document.createElement('div')
     const div2 = document.createElement('div')
@@ -142,6 +143,7 @@ function renderDrink(drink, drinkIngArray){
     const btn = document.createElement('btn')
     const p2 = document.createElement('p')
     const p3 = document.createElement('p')
+    const p4 = document.createElement('p')
 
     div1.className = 'col-4'
     div2.className = 'card'
@@ -156,14 +158,17 @@ function renderDrink(drink, drinkIngArray){
     p2.className = 'card-text hidden'
     p2.textContent = `Ingredients:${drinkIngArray}`
     p3.className = 'card-text hidden'
-    p3.textContent = `Instructions: ${drink.strInstructions}`
+    p3.textContent = `Measurements: ${drinkMeasArray}`
+    p4.className = 'card-text hidden'
+    p4.textContent = `Instructions: ${drink.strInstructions}`
     btn.addEventListener('click', () => {
       p2.classList.toggle('hidden')
-      p3.classList.toggle('hidden')  
+      p3.classList.toggle('hidden')
+      p4.classList.toggle('hidden')  
     })
 
     p1.append(btn)
-    div3.append(p1, p2, p3)
+    div3.append(p1, p2, p3, p4)
     div2.append(img, div3)
     div1.append(div2)
     cardsContainer.appendChild(div1)
