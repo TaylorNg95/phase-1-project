@@ -133,10 +133,12 @@ function generateDrinkMatches(){
 function renderDrink(drink){
     console.log(drink.strDrink)
     const cardHTML = `
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src=${drink.strDrinkThumb}>
-            <div class="card-body">
-                <p class="card-text">${drink.strDrink}</p>
+        <div class="col-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src=${drink.strDrinkThumb}>
+                <div class="card-body">
+                    <p class="card-text">${drink.strDrink}<button class='more-info-btn'>More Info</button></p>
+                </div>
             </div>
         </div>
     `
