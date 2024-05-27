@@ -89,11 +89,9 @@ function addEvents(btn){
     })
     btn.addEventListener('click', function(event){
         this.classList.toggle('selected')
-        /* debugger */
         if(this.classList.contains('selected')){
             userIngredients.push(this.dataset.name)
         } else {
-            /* debugger */
             const savedIngredient = userIngredients.indexOf(this.dataset.name)
             delete userIngredients[savedIngredient] // probably revise this so it doesn't return empty
         }
@@ -104,10 +102,15 @@ function addEvents(btn){
 document.querySelector('#make-me-drinks').addEventListener('click', function(){
     btnContainer.classList.add('hidden')
     drinksContainer.classList.remove('hidden')
+    generateDrinkMatches()
+})
 
+function generateDrinkMatches(){
+    debugger
+    userIngredients = userIngredients.filter(element => element !== null)
+    debugger
     drinksArray.forEach(drink => {
         let status = true
-        /* debugger */
         let counter = 1
         let drinkKey = 'strIngredient1'
         let ingArray = []
@@ -116,20 +119,33 @@ document.querySelector('#make-me-drinks').addEventListener('click', function(){
             counter++
             drinkKey = `strIngredient${counter}`
         }
-        // Creates an array of ingredients for one drink in the database
         ingArray.forEach(ing => {
             const search = userIngredients.find(userIng => userIng.toLowerCase() === ing.toLowerCase())
-            /* debugger */
-            // Takes each ingredient for that one drink, searches the userIngredients array for a match to that one drink
-            // As soon as an ingredient is not found, status is set to false
             if(search === undefined){
                 status = false
             }
         })
-        if(status === true){renderDrink(drink)} // THIS IS WHERE WE LEFT OFF
+        if(status === true){renderDrink(drink)}
     })
-})
+}
 
 function renderDrink(drink){
     console.log(drink.strDrink)
+    const cardHTML = `
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src=${drink.strDrinkThumb}>
+            <div class="card-body">
+                <p class="card-text">${drink.strDrink}</p>
+            </div>
+        </div>
+    `
+    document.querySelector('.row').innerHTML = cardHTML
+    /* <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://www.thecocktaildb.com/images/media/drink/tqpvqp1472668328.jpg" alt="Drink">
+                    <div class="card-body">
+                      <p class="card-text">ABC</p>
+                    </div>
+                </div>
+            </div> */
 }
