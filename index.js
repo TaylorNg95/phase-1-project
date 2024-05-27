@@ -40,7 +40,8 @@ function populateDrinksArray(data){
             extractIngredients(drink) // Once drinksArray fully loaded, extract ingredients from each drink object
         })
     }
-    ingredientsArray.sort()
+    ingredientsArray = ingredientsArray.map(element => element[0].toUpperCase() + element.slice(1)) // Capitalize first letter to account for lowercase affecting alphabet sorting
+    ingredientsArray.sort() // Placed into alphabet order for easier user experience.
     ingredientsArray.forEach(ingredient => {
         renderIngredient(ingredient)
     })
@@ -66,15 +67,15 @@ function extractIngredients(drink){
         const foundValue = ingredientsArray.find(item => item.toLowerCase() === ingredient.toLowerCase())
         if (!foundValue) {
             ingredientsArray.push(ingredient)
-        }
+        } // TBD: CAN THIS BE MODIFIED INTO A MORE GENERAL FIND?
     })
 }
 
 function renderIngredient(ingredient){
     const btn = document.createElement('button')
-    btn.dataset.name = ingredient
+    btn.dataset.name = ingredient // These are unique names, so can be unique identifiers
     btn.textContent = ingredient
-    addEvents(btn)
+    addEvents(btn) // There are multiple events attached to the button, so easier to separate function
     btnContainer.appendChild(btn)
 }
 
@@ -84,7 +85,7 @@ function addEvents(btn){
         this.style.backgroundColor = '#0d6efd';
     })
     btn.addEventListener('mouseout', function(){
-        if(!this.classList.contains('selected')){
+        if(!this.classList.contains('selected')){ // REVIEW: this will override a hover
             this.style.color = '#0d6efd';
             this.style.backgroundColor = '#ffffff';
         }
@@ -127,7 +128,7 @@ function generateDrinkMatches(){
             }
         })
         if(status === true){
-            ingArray = ingArray.map(ing => ' ' + ing)
+            ingArray = ingArray.map(element => ' ' + element)
             renderDrink(drink, ingArray)
         }
     })
