@@ -100,6 +100,7 @@ function addEvents(btn){
 }
 
 document.querySelector('#make-me-drinks').addEventListener('click', function(){
+    this.classList.add('hidden')
     btnContainer.classList.add('hidden')
     drinksContainer.classList.remove('hidden')
     generateDrinkMatches()
@@ -140,12 +141,4 @@ function renderDrink(drink){
         </div>
     `
     document.querySelector('.row').innerHTML = cardHTML
-    /* <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://www.thecocktaildb.com/images/media/drink/tqpvqp1472668328.jpg" alt="Drink">
-                    <div class="card-body">
-                      <p class="card-text">ABC</p>
-                    </div>
-                </div>
-            </div> */
 }
