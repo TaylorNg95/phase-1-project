@@ -80,13 +80,13 @@ function renderIngredient(ingredient){
 
 function addEvents(btn){
     btn.addEventListener('mouseover', function(){
-        this.style.color = '#ffffff';
-        this.style.backgroundColor = '#0d6efd';
+        this.style.color = 'white';
+        this.style.backgroundColor = 'gray';
     })
     btn.addEventListener('mouseout', function(){
         if(!this.classList.contains('selected')){ // REVIEW: this will override a hover
-            this.style.color = '#0d6efd';
-            this.style.backgroundColor = '#ffffff';
+            this.style.color = 'black';
+            this.style.backgroundColor = 'white';
         }
     })
     btn.addEventListener('click', function(){
@@ -97,7 +97,7 @@ function addEvents(btn){
 // Handle when a user submits the ingredients they have available, and find / render drink matches
 
 document.querySelector('#make-me-drinks').addEventListener('click', function(){
-    this.classList.add('hidden')
+    this.style.display = 'none'
     btnContainer.classList.add('hidden')
     document.querySelector('h1').textContent = 'Try Some of These Cocktails!'
     document.querySelector('h2').classList.add('hidden')

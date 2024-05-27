@@ -17,8 +17,8 @@ h2 {
 
 button {
     margin: 2px;
-    border: solid 2px #0d6efd;
-    color: #0d6efd;
+    border: solid 2px gray;
+    color: black;
     border-radius: 5px;
     background-color: #FFFFFF;
     font-weight: bold;
@@ -29,8 +29,8 @@ button {
     margin: 0 auto;
     margin-top: 3%;
     font-size: 1.5em;
-    color: gray;
-    border: gray;
+    color: black;
+    border: gray solid 2px;
 }
 
 #make-me-drinks:hover {
@@ -38,14 +38,9 @@ button {
     background-color: gray;
 }
 
-.hover {
-    color: #FFFFFF;
-    background: #0d6efd;
-}
-
 .selected {
     color: #FFFFFF;
-    background: #0d6efd;
+    background: gray;
 }
 
 .more-info-btn {
