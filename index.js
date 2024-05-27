@@ -99,6 +99,8 @@ function addEvents(btn){
 document.querySelector('#make-me-drinks').addEventListener('click', function(){
     this.classList.add('hidden')
     btnContainer.classList.add('hidden')
+    document.querySelector('h1').textContent = 'Try Some of These Cocktails!'
+    document.querySelector('h2').classList.add('hidden')
     document.querySelector('#drinks-container').classList.remove('hidden')
     generateDrinkMatches()
 })
