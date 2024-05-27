@@ -126,21 +126,24 @@ function generateDrinkMatches(){
                 status = false
             }
         })
-        if(status === true){renderDrink(drink)}
+        if(status === true){renderDrink(drink, ingArray)}
     })
 }
 
-function renderDrink(drink){
+function renderDrink(drink, ingArray){
     console.log(drink.strDrink)
+    const div = document.createElement('div')
+    div.className = 'col-4'
     const cardHTML = `
-        <div class="col-4">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src=${drink.strDrinkThumb}>
-                <div class="card-body">
-                    <p class="card-text">${drink.strDrink}<button class='more-info-btn'>More Info</button></p>
-                </div>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src=${drink.strDrinkThumb}>
+            <div class="card-body">
+                <p class="card-text">${drink.strDrink}<button class='more-info-btn'>More Info</button></p>
+                <p class="card-text">Ingredients: ${ingArray}</p>
+                <p class="card-text">Instructions: ${drink.strInstructions}</p>
             </div>
         </div>
     `
-    document.querySelector('.row').innerHTML = cardHTML
+    div.innerHTML = cardHTML
+    document.querySelector('.row').appendChild = div //START FROM HERE, WHY ARE DRINKS NOT RENDERING
 }
