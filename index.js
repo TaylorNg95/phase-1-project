@@ -1,3 +1,5 @@
+// Global variables
+
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'
 let counter = 0
 
@@ -6,8 +8,9 @@ let ingredientsArray = []
 let userIngredients = []
 
 const btnContainer = document.querySelector('#btn-container')
-const drinksContainer = document.querySelector('#drinks-container')
 const cardsContainer = document.querySelector('.row')
+
+// Get all drink objects loaded into global variable drinksArray
 
 document.addEventListener('DOMContentLoaded', function(){
     fetchAllDrinks('a')
@@ -18,24 +21,23 @@ function fetchAllDrinks(letter){
         .then(response => response.json())
         .then(data => {
             populateDrinksArray(data)
-            /* console.log(ingredientsArray) */ // WHY DOES THIS GET LOGGED EVERY TIME??
         }
     )
 }
 
 function populateDrinksArray(data){
     if(data.drinks !== null){
-        drinksArray = drinksArray.concat(data.drinks)
+        drinksArray = drinksArray.concat(data.drinks) // Contactenate drinksArray with drinks for each letter
     }
     if(counter < 25){
         const newLetter = alphabet[counter + 1]
         if(newLetter !== undefined){
-            fetchAllDrinks(newLetter)
+            fetchAllDrinks(newLetter) // Utilize recursion to continue fetching data A-Z
         }
         counter++
     } else {
         drinksArray.forEach(drink => {
-            keepIngredients(drink)
+            extractIngredients(drink) // Once drinksArray fully loaded, extract ingredients from each drink object
         })
     }
     ingredientsArray.sort()
@@ -48,25 +50,24 @@ function populateDrinksArray(data){
 counter < 25 condition is tested, it does not pass, which means that there are no more fetches made. This
 avoids a fetch call to undefined. REVIEW THIS  */
 
-function keepIngredients(drink){
+// There are a maximum of 15 ingredients per drink. Extract these are variables and create an ingredients Obj
+// for each drink.
+
+function extractIngredients(drink){
     const {strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15} = drink
     const ingredientsObj = {strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15}
     Object.keys(ingredientsObj).forEach(ingredient => {
         if(!ingredientsObj[ingredient]){
             delete ingredientsObj[ingredient]
         }
+    }) // TBD: CHANGE TO FILTER FN - FILTER OUT WHERE THERE ARE NULL VALUES SINCE MOST DON'T HAVE 15 INGREDIENTS
+    const drinkIngredientsArray = Object.values(ingredientsObj)
+    drinkIngredientsArray.forEach(ingredient => {
+        const foundValue = ingredientsArray.find(item => item.toLowerCase() === ingredient.toLowerCase())
+        if (!foundValue) {
+            ingredientsArray.push(ingredient)
+        }
     })
-    const ingredientsArray = Object.values(ingredientsObj)
-    ingredientsArray.forEach(ingredient => {
-        udpateIngredientsArray(ingredient)
-    })
-}
-
-function udpateIngredientsArray(ingredient){
-    const foundValue = ingredientsArray.find(item => item.toLowerCase() === ingredient.toLowerCase())
-    if (!foundValue) {
-        ingredientsArray.push(ingredient)
-    }
 }
 
 function renderIngredient(ingredient){
@@ -103,7 +104,7 @@ function addEvents(btn){
 document.querySelector('#make-me-drinks').addEventListener('click', function(){
     this.classList.add('hidden')
     btnContainer.classList.add('hidden')
-    drinksContainer.classList.remove('hidden')
+    document.querySelector('#drinks-container').classList.remove('hidden')
     generateDrinkMatches()
 })
 
