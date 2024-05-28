@@ -52,6 +52,11 @@ button {
     cursor: pointer;
 }
 
+.more-info-btn:hover {
+    background-color: gray;
+    color: white;
+}
+
 .col-4 {
     margin: 5% 0 5% 0
 }

@@ -11,9 +11,7 @@ const cardsContainer = document.querySelector('.row')
 
 // Get all drink objects loaded into global variable allDrinksArray
 
-document.addEventListener('DOMContentLoaded', function(){
-    fetchAllDrinks('a')
-})
+fetchAllDrinks('a')
 
 function fetchAllDrinks(letter){
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`)
@@ -39,7 +37,6 @@ function populateDrinksArray(data){
             extractIngredients(drink) // Once allDrinksArray fully loaded, extract ingredients from each drink object
         })
     }
-    debugger
     allIngredientsArray = allIngredientsArray.map(element => element[0].toUpperCase() + element.slice(1)) // Capitalize first letter to account for lowercase affecting alphabet sorting
     allIngredientsArray.sort() // Placed into alphabet order for easier user experience.
     allIngredientsArray.forEach(ingredient => {
@@ -62,7 +59,7 @@ function extractIngredients(drink){
         const foundValue = allIngredientsArray.find(item => item.toLowerCase() === ingredient.toLowerCase())
         if (!foundValue) {
             allIngredientsArray.push(ingredient)
-        } // TBD: CAN THIS BE MODIFIED INTO A MORE GENERAL FIND?
+        } // Check if the each ingredient is already in global allIngredientsArray, and add if there's no match
     })
 }
 
@@ -80,7 +77,7 @@ function addEvents(btn){
         this.style.backgroundColor = 'gray';
     })
     btn.addEventListener('mouseout', function(){
-        if(!this.classList.contains('selected')){ // REVIEW: this will override a hover
+        if(!this.classList.contains('selected')){
             this.style.color = 'black';
             this.style.backgroundColor = 'white';
         }
@@ -134,7 +131,6 @@ function generateDrinkMatches(){
 }
 
 function renderDrink(drink, drinkIngArray, drinkMeasArray){
-    console.log(drink.strDrink)
     const div1 = document.createElement('div')
     const div2 = document.createElement('div')
     const img = document.createElement('img')
