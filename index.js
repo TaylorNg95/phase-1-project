@@ -36,12 +36,8 @@ function populateDrinksArray(data){
         allDrinksArray.forEach(drink => {
             extractIngredients(drink) // Once allDrinksArray fully loaded, extract ingredients from each drink object
         })
+        renderIngredients() //
     }
-    allIngredientsArray = allIngredientsArray.map(element => element[0].toUpperCase() + element.slice(1)) // Capitalize first letter to account for lowercase affecting alphabet sorting
-    allIngredientsArray.sort() // Placed into alphabet order for easier user experience.
-    allIngredientsArray.forEach(ingredient => {
-        renderIngredient(ingredient)
-    })
 }
 
 /* The drinks array always gets populated first. The last time line 31 runs is when counter = 24 and therefore
@@ -60,6 +56,14 @@ function extractIngredients(drink){
         if (!foundValue) {
             allIngredientsArray.push(ingredient)
         } // Check if the each ingredient is already in global allIngredientsArray, and add if there's no match
+    })
+}
+
+function renderIngredients(){
+    allIngredientsArray = allIngredientsArray.map(element => element[0].toUpperCase() + element.slice(1)) // Capitalize first letter to account for lowercase affecting alphabet sorting
+    allIngredientsArray.sort() // Placed into alphabet order for easier user experience.
+    allIngredientsArray.forEach(ingredient => {
+        renderIngredient(ingredient)
     })
 }
 
