@@ -93,12 +93,13 @@ function addEvents(btn){
 
 // Handle when a user submits the ingredients they have available, and find / render drink matches
 
-document.querySelector('#make-me-drinks').addEventListener('click', function(){
-    this.style.display = 'none'
+document.querySelector('#make-me-drinks').addEventListener('click', function(e){
+    e.target.style.display = 'none'
     btnContainer.classList.add('hidden')
     document.querySelector('h1').textContent = 'Try Some of These Cocktails!'
     document.querySelector('h2').classList.add('hidden')
     document.querySelector('#drinks-container').classList.remove('hidden')
+    document.querySelector('#edit-ingredients').classList.remove('hidden')
     generateDrinkMatches()
 })
 
@@ -173,3 +174,13 @@ function renderDrink(drink, drinkIngArray, drinkMeasArray){
     div1.append(div2)
     cardsContainer.appendChild(div1)
 }
+
+document.querySelector('#edit-ingredients').addEventListener('click', function(e){
+    e.target.classList.remove('hidden')
+    document.querySelector('#make-me-drinks').style.display = 'block'
+    btnContainer.classList.remove('hidden')
+    document.querySelector('h1').textContent = 'Want A Cocktail, But Don\'t Know What To Make?\nLet Us Help You!'
+    document.querySelector('h2').classList.remove('hidden')
+    document.querySelector('#drinks-container').classList.add('hidden')
+    document.querySelector('#edit-ingredients').classList.add('hidden')
+})

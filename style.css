@@ -38,7 +38,11 @@ button {
     border: gray solid 2px;
 }
 
-#make-me-drinks:hover {
+#edit-ingredients {
+    margin: 0 auto;
+}
+
+#make-me-drinks:hover, #edit-ingredients:hover {
     color: white;
     background-color: gray;
 }
