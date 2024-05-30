@@ -90,8 +90,10 @@ function addEvents(btn){
 // Handle when a user submits the ingredients they have available, and find / render drink matches
 
 makeDrinksBtn.addEventListener('click', function(e){
+    document.documentElement.scrollTop = 0; // TBD: can adjust so user does not see scroll
     toggleClass(editIngredientsBtn)
     togglePageDisplay(e)
+    clearCardsContainer() // Relevant if the user has edited ingredients - we need to clear the container and re-render
     generateDrinkMatches()
 })
 
@@ -183,6 +185,10 @@ function renderDrink(drink, drinkIngArray, drinkMeasArray){
     div2.append(img, div3)
     div1.append(div2)
     cardsContainer.appendChild(div1)
+}
+
+function clearCardsContainer(){
+    cardsContainer.innerHTML = ''
 }
 
 document.querySelector('#select-all').addEventListener('click', function(e){
