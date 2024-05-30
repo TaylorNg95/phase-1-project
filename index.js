@@ -95,7 +95,7 @@ function addEvents(btn){
 
 makeDrinksBtn.addEventListener('click', function(e){
     document.documentElement.scrollTop = 0; // TBD: can adjust so user does not see scroll
-    toggleClass(editIngredientsBtn)
+    toggleHidden(editIngredientsBtn)
     togglePageDisplay(e)
     clearCardsContainer() // Relevant if the user has edited ingredients - we need to clear the container and re-render
     generateDrinkMatches()
@@ -106,21 +106,21 @@ function clearCardsContainer(){
 }
 
 editIngredientsBtn.addEventListener('click', function(e){
-    toggleClass(makeDrinksBtn)
+    toggleHidden(makeDrinksBtn)
     togglePageDisplay(e)
 })
 
 function togglePageDisplay(e){
-    toggleClass(e.target)
+    toggleHidden(e.target)
     const h1 = document.querySelector('h1')
-    h1.textContent === 'Try Some of These Cocktails!' ? h1.textContent = 'Want A Cocktail, But Don\'t Know What To Make?\nLet Us Help You!' : h1.textContent = 'Try Some of These Cocktails!'
-    toggleClass(document.querySelector('h2'))
-    toggleClass(btnContainer)
-    toggleClass(document.querySelector('#drinks-container'))
-    toggleClass(selectAllBtn)
+    h1.textContent === 'Try Some of These Cocktails!' ? h1.innerHTML = 'Want A Cocktail, But Don\'t Know What To Make?<br>Let Us Help You!' : h1.textContent = 'Try Some of These Cocktails!'
+    toggleHidden(document.querySelector('h2'))
+    toggleHidden(btnContainer)
+    toggleHidden(document.querySelector('#drinks-container'))
+    toggleHidden(selectAllBtn)
 }
 
-function toggleClass(element){
+function toggleHidden(element){
     element.classList.contains('hidden') ? element.classList.remove('hidden') : element.classList.add('hidden')
 }
 
@@ -167,7 +167,7 @@ function renderDrink(drink, drinkIngArray, drinkMeasArray){
     const p3 = document.createElement('p')
     const p4 = document.createElement('p')
 
-    div1.className = 'col-4'
+    div1.className = 'col-4 fade-in-1'
     div2.className = 'card'
     div2.style.width = '18rem'
     img.className = 'card-img-top'

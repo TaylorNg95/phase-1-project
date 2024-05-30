@@ -45,7 +45,7 @@ h2 {
 }
 
 .fade-in-2 {
-    animation: FadeIn2 6s forwards
+    animation: FadeIn2 7s forwards
 }
 
 #btn-container {
@@ -68,8 +68,12 @@ button {
     font-size: 1.5em;
 }
 
+#select-all, #edit-ingredients, #make-drinks {
+    font-style: italic;
+}
+
 .col-4 {
-    margin: 5% 0 5% 0
+    margin: 2% 0 5% 0
 }
 
 .card-body p:nth-child(1) {
