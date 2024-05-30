@@ -29,26 +29,18 @@ button {
     cursor: pointer;
 }
 
-.hovered, .selected {
-    color: white;
-    background: gray;
-}
-
 #make-drinks {
     margin: 0 auto;
     margin-top: 3%;
     font-size: 1.5em;
-    color: black;
-    border: gray solid 2px;
 }
 
-#edit-ingredients {
-    margin: 0 auto;
+.col-4 {
+    margin: 5% 0 5% 0
 }
 
-#make-drinks:hover, #edit-ingredients:hover, #select-all:hover {
-    color: white;
-    background-color: gray;
+.card-body p:nth-child(1) {
+    font-weight: bold;
 }
 
 .more-info-btn {
@@ -59,19 +51,15 @@ button {
     cursor: pointer;
 }
 
-.more-info-btn:hover {
-    background-color: gray;
+.hovered, .selected, #make-drinks:hover, #edit-ingredients:hover, #select-all:hover, .more-info-btn:hover {
     color: white;
+    background: gray;
 }
 
-.col-4 {
-    margin: 5% 0 5% 0
+.more-info-btn:hover {
+    border: solid 2px black;
 }
 
 .hidden {
     display: none
-}
-
-.card-body p:nth-child(1) {
-    font-weight: bold;
 }
