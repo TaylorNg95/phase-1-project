@@ -6,6 +6,21 @@ body {
 h1 {
     text-align: center;
     color: gray;
+    opacity: 0;
+}
+
+@keyframes FadeIn1 {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-in-1 {
+    animation: FadeIn1 4s forwards
 }
 
 h2 {
@@ -13,6 +28,24 @@ h2 {
     color: gray;
     font-style: italic;
     text-align: center
+}
+
+@keyframes FadeIn2 {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-in-2 {
+    animation: FadeIn2 6s forwards
 }
 
 #btn-container {

@@ -70,6 +70,7 @@ function renderIngredients(){
 
 function renderIngredient(ingredient){
     const btn = document.createElement('button')
+    btn.className = 'fade-in-1'
     btn.dataset.name = ingredient // These are unique names, so can be unique identifiers
     btn.textContent = ingredient
     addEvents(btn) // There are multiple events attached to the button, so easier to separate function
