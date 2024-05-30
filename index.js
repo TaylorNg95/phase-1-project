@@ -42,6 +42,7 @@ function populateAllDrinksArray(data){
         })
         selectAllBtn.classList.remove('hidden')
         makeDrinksBtn.classList.remove('hidden') // Ensures that the "Select All" and "Make Me a Drink" buttons are hidden while data is fetched
+        document.querySelector('#loading-img').style.display = 'none'
         renderIngredients()
     }
 }

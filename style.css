@@ -52,6 +52,26 @@ h2 {
     margin-top: 2%
 }
 
+#loading-img {
+    margin-top: 50%;
+    width: 5%;
+    display: block;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spin {
+    animation: spin 2s infinite linear;
+}
+
 button {
     margin: 2px;
     border: solid 2px gray;
