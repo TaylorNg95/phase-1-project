@@ -27,7 +27,8 @@ h2 {
     font-size: 1.25em;
     color: gray;
     font-style: italic;
-    text-align: center
+    text-align: center;
+    margin: 2% 0 5% 0;
 }
 
 @keyframes FadeIn2 {
@@ -35,7 +36,7 @@ h2 {
         opacity: 0;
     }
 
-    25% {
+    33% {
         opacity: 0
     }
 
@@ -45,17 +46,18 @@ h2 {
 }
 
 .fade-in-2 {
-    animation: FadeIn2 7s forwards
+    animation: FadeIn2 8s forwards;
 }
 
 #btn-container {
-    margin-top: 2%
+    margin-top: 2%;
 }
 
 #loading-img {
     width: 5%;
     display: block;
     margin: 0 auto;
+    margin-top: 10%;
 }
 
 @keyframes spin {
