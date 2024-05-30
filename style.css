@@ -19,7 +19,7 @@ h2 {
     margin-top: 2%
 }
 
-#btn-container button {
+button {
     margin: 2px;
     border: solid 2px gray;
     color: black;
@@ -34,8 +34,7 @@ h2 {
     background: gray;
 }
 
-#make-me-drinks {
-    display: block;
+#make-drinks {
     margin: 0 auto;
     margin-top: 3%;
     font-size: 1.5em;
@@ -47,7 +46,7 @@ h2 {
     margin: 0 auto;
 }
 
-#make-me-drinks:hover, #edit-ingredients:hover, #select-all:hover {
+#make-drinks:hover, #edit-ingredients:hover, #select-all:hover {
     color: white;
     background-color: gray;
 }

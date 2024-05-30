@@ -7,7 +7,7 @@ let allDrinksArray = []
 let allIngredientsArray = []
 
 const btnContainer = document.querySelector('#btn-container')
-const cardsContainer = document.querySelector('.row')
+const cardsContainer = document.querySelector('#cards-container')
 
 // Get all drink objects loaded into global variable allDrinksArray
 
@@ -86,15 +86,31 @@ function addEvents(btn){
 
 // Handle when a user submits the ingredients they have available, and find / render drink matches
 
-document.querySelector('#make-me-drinks').addEventListener('click', function(e){
-    e.target.style.display = 'none'
-    btnContainer.classList.add('hidden')
-    document.querySelector('h1').textContent = 'Try Some of These Cocktails!'
-    document.querySelector('h2').classList.add('hidden')
+document.querySelector('#make-drinks').addEventListener('click', function(e){
+    togglePageDisplay(e)
     document.querySelector('#drinks-container').classList.remove('hidden')
     document.querySelector('#edit-ingredients').classList.remove('hidden')
     generateDrinkMatches()
 })
+
+document.querySelector('#edit-ingredients').addEventListener('click', function(e){
+    togglePageDisplay(e)
+})
+
+function togglePageDisplay(e){
+    const h1 = document.querySelector('h1')
+    h1.innerHTML === 'Want A Cocktail, But Don\'t Know What To Make?<br>Let Us Help You!' ? h1.textContent = 'Try Some of These Cocktails!' : h1.textContent = 'Want A Cocktail, But Don\'t Know What To Make?\nLet Us Help You!'
+    toggleClass(document.querySelector('h2'))
+    toggleClass(e.target)
+    toggleClass(btnContainer)
+    toggleClass(document.querySelector('#drinks-container'))
+    toggleClass(document.querySelector('#select-all'))
+    toggleClass(document.querySelector('#make-drinks'))
+}
+
+function toggleClass(element){
+    element.classList.contains('hidden') ? element.classList.remove('hidden') : element.classList.add('hidden')
+}
 
 function generateDrinkMatches(){
     const userIngredients = Array.from(document.querySelectorAll('.selected')).map(element => element.dataset.name)
@@ -166,16 +182,6 @@ function renderDrink(drink, drinkIngArray, drinkMeasArray){
     div1.append(div2)
     cardsContainer.appendChild(div1)
 }
-
-document.querySelector('#edit-ingredients').addEventListener('click', function(e){
-    e.target.classList.remove('hidden')
-    document.querySelector('#make-me-drinks').style.display = 'block'
-    btnContainer.classList.remove('hidden')
-    document.querySelector('h1').textContent = 'Want A Cocktail, But Don\'t Know What To Make?\nLet Us Help You!'
-    document.querySelector('h2').classList.remove('hidden')
-    document.querySelector('#drinks-container').classList.add('hidden')
-    document.querySelector('#edit-ingredients').classList.add('hidden')
-})
 
 document.querySelector('#select-all').addEventListener('click', function(e){
     const buttons = document.querySelectorAll('#btn-container button') 
