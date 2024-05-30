@@ -12,6 +12,7 @@ const cardsContainer = document.querySelector('#cards-container')
 const makeDrinksBtn = document.querySelector('#make-drinks')
 const editIngredientsBtn = document.querySelector('#edit-ingredients')
 const selectAllBtn = document.querySelector('#select-all')
+const searchBar = document.querySelector('#search-bar')
 
 // Get all drink objects loaded into global variable allDrinksArray
 
@@ -41,7 +42,8 @@ function populateAllDrinksArray(data){
             extractIngredients(drink) // Once allDrinksArray fully loaded, extract ingredients from each drink object
         })
         selectAllBtn.classList.remove('hidden')
-        makeDrinksBtn.classList.remove('hidden') // Ensures that the "Select All" and "Make Me a Drink" buttons are hidden while data is fetched
+        makeDrinksBtn.classList.remove('hidden')
+        searchBar.classList.remove('hidden') // Ensures that the "Select All", "Make Me a Drink", and "Search Bar" are hidden while data is fetched
         document.querySelector('#loading-img').style.display = 'none'
         renderIngredients()
     }

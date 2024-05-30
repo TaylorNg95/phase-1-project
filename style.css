@@ -28,7 +28,7 @@ h2 {
     color: gray;
     font-style: italic;
     text-align: center;
-    margin: 2% 0 5% 0;
+    margin: 2% 0 3% 0;
 }
 
 @keyframes FadeIn2 {
@@ -49,8 +49,24 @@ h2 {
     animation: FadeIn2 8s forwards;
 }
 
+.form-group {
+    display: inline;
+    float: right;
+    width: 25%;
+    margin-right: 5%;
+}
+
+.form-control {
+    font-size: 1rem;
+    line-height: 1;
+    font-weight: bold;
+    font-style: italic;
+    color: black;
+    border: solid 2px gray;
+}
+
 #btn-container {
-    margin-top: 2%;
+    margin-top: 3%;
 }
 
 #loading-img {
