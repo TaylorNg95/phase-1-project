@@ -184,3 +184,11 @@ document.querySelector('#edit-ingredients').addEventListener('click', function(e
     document.querySelector('#drinks-container').classList.add('hidden')
     document.querySelector('#edit-ingredients').classList.add('hidden')
 })
+
+document.querySelector('#select-all').addEventListener('click', function(e){
+    const buttons = document.querySelectorAll('#btn-container button') 
+    this.textContent = this.textContent === 'Select All' ? 'Unselect All' : 'Select All'
+    buttons.forEach(btn => {
+        this.textContent === 'Select All' ? btn.classList.remove('selected') : btn.classList.add('selected')
+    })
+})

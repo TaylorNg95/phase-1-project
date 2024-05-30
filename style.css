@@ -42,7 +42,7 @@ button {
     margin: 0 auto;
 }
 
-#make-me-drinks:hover, #edit-ingredients:hover {
+#make-me-drinks:hover, #edit-ingredients:hover, #select-all:hover {
     color: white;
     background-color: gray;
 }
