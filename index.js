@@ -9,6 +9,9 @@ let allIngredientsArray = []
 const btnContainer = document.querySelector('#btn-container')
 const cardsContainer = document.querySelector('#cards-container')
 
+const makeDrinksBtn = document.querySelector('#make-drinks')
+const editIngredientsBtn = document.querySelector('#edit-ingredients')
+
 // Get all drink objects loaded into global variable allDrinksArray
 
 fetchAllDrinks('a')
@@ -86,26 +89,25 @@ function addEvents(btn){
 
 // Handle when a user submits the ingredients they have available, and find / render drink matches
 
-document.querySelector('#make-drinks').addEventListener('click', function(e){
+makeDrinksBtn.addEventListener('click', function(e){
+    toggleClass(editIngredientsBtn)
     togglePageDisplay(e)
-    document.querySelector('#drinks-container').classList.remove('hidden')
-    document.querySelector('#edit-ingredients').classList.remove('hidden')
     generateDrinkMatches()
 })
 
-document.querySelector('#edit-ingredients').addEventListener('click', function(e){
+editIngredientsBtn.addEventListener('click', function(e){
+    toggleClass(makeDrinksBtn)
     togglePageDisplay(e)
 })
 
 function togglePageDisplay(e){
+    toggleClass(e.target)
     const h1 = document.querySelector('h1')
     h1.innerHTML === 'Want A Cocktail, But Don\'t Know What To Make?<br>Let Us Help You!' ? h1.textContent = 'Try Some of These Cocktails!' : h1.textContent = 'Want A Cocktail, But Don\'t Know What To Make?\nLet Us Help You!'
     toggleClass(document.querySelector('h2'))
-    toggleClass(e.target)
     toggleClass(btnContainer)
     toggleClass(document.querySelector('#drinks-container'))
     toggleClass(document.querySelector('#select-all'))
-    toggleClass(document.querySelector('#make-drinks'))
 }
 
 function toggleClass(element){
