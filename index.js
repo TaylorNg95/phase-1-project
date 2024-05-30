@@ -121,6 +121,7 @@ function togglePageDisplay(e){
     toggleHidden(btnContainer)
     toggleHidden(document.querySelector('#drinks-container'))
     toggleHidden(selectAllBtn)
+    toggleHidden(searchBar)
 }
 
 function toggleHidden(element){
@@ -203,5 +204,17 @@ selectAllBtn.addEventListener('click', function(e){
     this.textContent = this.textContent === 'Select All Ingredients' ? 'Unselect All Ingredients' : 'Select All Ingredients'
     buttons.forEach(btn => {
         this.textContent === 'Select All Ingredients' ? btn.classList.remove('selected', 'hovered') : btn.classList.add('selected', 'hovered')
+    })
+})
+
+document.querySelector('#searchInput').addEventListener('keyup', function(){
+    const filter = this.value.toLowerCase()
+    const buttons = document.querySelectorAll('#btn-container button')
+
+    buttons.forEach(button => {
+        console.log(button)
+        if(button.textContent.toLowerCase().includes(filter)){
+            button.style.display = ''
+        } else button.style.display = 'none'
     })
 })
