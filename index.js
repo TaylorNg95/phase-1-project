@@ -197,8 +197,8 @@ function renderDrink(drink, drinkIngArray, drinkMeasArray){
 
 selectAllBtn.addEventListener('click', function(e){
     const buttons = document.querySelectorAll('#btn-container button') 
-    this.textContent = this.textContent === 'Select All' ? 'Unselect All' : 'Select All'
+    this.textContent = this.textContent === 'Select All Ingredients' ? 'Unselect All Ingredients' : 'Select All Ingredients'
     buttons.forEach(btn => {
-        this.textContent === 'Select All' ? btn.classList.remove('selected', 'hovered') : btn.classList.add('selected', 'hovered')
+        this.textContent === 'Select All Ingredients' ? btn.classList.remove('selected', 'hovered') : btn.classList.add('selected', 'hovered')
     })
 })
