@@ -110,7 +110,7 @@ editIngredientsBtn.addEventListener('click', function(e){
 function togglePageDisplay(e){
     toggleClass(e.target)
     const h1 = document.querySelector('h1')
-    h1.innerHTML === 'Want A Cocktail, But Don\'t Know What To Make?<br>Let Us Help You!' ? h1.textContent = 'Try Some of These Cocktails!' : h1.textContent = 'Want A Cocktail, But Don\'t Know What To Make?\nLet Us Help You!'
+    h1.textContent === 'Try Some of These Cocktails!' ? h1.textContent = 'Want A Cocktail, But Don\'t Know What To Make?\nLet Us Help You!' : h1.textContent = 'Try Some of These Cocktails!'
     toggleClass(document.querySelector('h2'))
     toggleClass(btnContainer)
     toggleClass(document.querySelector('#drinks-container'))
