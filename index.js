@@ -11,6 +11,7 @@ const cardsContainer = document.querySelector('#cards-container')
 
 const makeDrinksBtn = document.querySelector('#make-drinks')
 const editIngredientsBtn = document.querySelector('#edit-ingredients')
+const selectAllBtn = document.querySelector('#select-all')
 
 // Get all drink objects loaded into global variable allDrinksArray
 
@@ -97,6 +98,10 @@ makeDrinksBtn.addEventListener('click', function(e){
     generateDrinkMatches()
 })
 
+function clearCardsContainer(){
+    cardsContainer.innerHTML = ''
+}
+
 editIngredientsBtn.addEventListener('click', function(e){
     toggleClass(makeDrinksBtn)
     togglePageDisplay(e)
@@ -109,7 +114,7 @@ function togglePageDisplay(e){
     toggleClass(document.querySelector('h2'))
     toggleClass(btnContainer)
     toggleClass(document.querySelector('#drinks-container'))
-    toggleClass(document.querySelector('#select-all'))
+    toggleClass(selectAllBtn)
 }
 
 function toggleClass(element){
@@ -187,14 +192,10 @@ function renderDrink(drink, drinkIngArray, drinkMeasArray){
     cardsContainer.appendChild(div1)
 }
 
-function clearCardsContainer(){
-    cardsContainer.innerHTML = ''
-}
-
-document.querySelector('#select-all').addEventListener('click', function(e){
+selectAllBtn.addEventListener('click', function(e){
     const buttons = document.querySelectorAll('#btn-container button') 
     this.textContent = this.textContent === 'Select All' ? 'Unselect All' : 'Select All'
     buttons.forEach(btn => {
-        this.textContent === 'Select All' ? btn.classList.remove('selected') : btn.classList.add('selected')
+        this.textContent === 'Select All' ? btn.classList.remove('selected', 'hovered') : btn.classList.add('selected', 'hovered')
     })
 })
