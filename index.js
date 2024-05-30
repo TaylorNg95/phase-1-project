@@ -40,6 +40,8 @@ function populateAllDrinksArray(data){
         allDrinksArray.forEach(drink => {
             extractIngredients(drink) // Once allDrinksArray fully loaded, extract ingredients from each drink object
         })
+        selectAllBtn.classList.remove('hidden')
+        makeDrinksBtn.classList.remove('hidden') // Ensures that the "Select All" and "Make Me a Drink" buttons are hidden while data is fetched
         renderIngredients()
     }
 }
