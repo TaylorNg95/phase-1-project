@@ -72,3 +72,7 @@ button {
 .hidden {
     display: none
 }
+
+.card-body p:nth-child(1) {
+    font-weight: bold;
+}

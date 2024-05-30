@@ -156,14 +156,13 @@ function renderDrink(drink, drinkIngArray, drinkMeasArray){
     p1.textContent = drink.strDrink
     btn.className = 'more-info-btn'
     btn.textContent = 'More Info'
-    p2.className = 'card-text hidden'
+    p2.className = 'card-text'
     p2.textContent = `Ingredients:${drinkIngArray}`
     p3.className = 'card-text hidden'
     p3.textContent = `Measurements: ${drinkMeasArray}`
     p4.className = 'card-text hidden'
     p4.textContent = `Instructions: ${drink.strInstructions}`
     btn.addEventListener('click', () => {
-      p2.classList.toggle('hidden')
       p3.classList.toggle('hidden')
       p4.classList.toggle('hidden')  
     })
