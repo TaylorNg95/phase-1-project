@@ -17,12 +17,12 @@ function fetchAllDrinks(letter){
     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`)
         .then(response => response.json())
         .then(data => {
-            populateDrinksArray(data)
+            populateAllDrinksArray(data)
         }
     )
 }
 
-function populateDrinksArray(data){
+function populateAllDrinksArray(data){
     if(data.drinks !== null){
         allDrinksArray = allDrinksArray.concat(data.drinks) // Contactenate allDrinksArray with drinks for each letter
     }
@@ -36,14 +36,9 @@ function populateDrinksArray(data){
         allDrinksArray.forEach(drink => {
             extractIngredients(drink) // Once allDrinksArray fully loaded, extract ingredients from each drink object
         })
-        renderIngredients() //
+        renderIngredients()
     }
 }
-
-/* The drinks array always gets populated first. The last time line 31 runs is when counter = 24 and therefore
-newLetter = alphabet[25], aka 'Z'. This ensures that the Z drinks get added to the new array, but then the
-function is not called again. Instead, the drinks array is complete and line 37 initiates ingredient
-extraction from every drink in the completed drinks array. */
 
 // Max of 15 ingredients per drink. Extract these as variables and create an ingredients Obj for each drink.
 
@@ -55,7 +50,7 @@ function extractIngredients(drink){
         const foundValue = allIngredientsArray.find(item => item.toLowerCase() === ingredient.toLowerCase())
         if (!foundValue) {
             allIngredientsArray.push(ingredient)
-        } // Check if the each ingredient is already in global allIngredientsArray, and add if there's no match
+        } // Check if the each ingredient is already in global allIngredientsArray, and add if there's no match, push the ingredient
     })
 }
 
@@ -77,13 +72,11 @@ function renderIngredient(ingredient){
 
 function addEvents(btn){
     btn.addEventListener('mouseover', function(){
-        this.style.color = 'white';
-        this.style.backgroundColor = 'gray';
+        this.classList.add('hovered')
     })
     btn.addEventListener('mouseout', function(){
         if(!this.classList.contains('selected')){
-            this.style.color = 'black';
-            this.style.backgroundColor = 'white';
+            this.classList.remove('hovered')
         }
     })
     btn.addEventListener('click', function(){

@@ -19,7 +19,7 @@ h2 {
     margin-top: 2%
 }
 
-button {
+#btn-container button {
     margin: 2px;
     border: solid 2px gray;
     color: black;
@@ -27,6 +27,11 @@ button {
     background-color: #FFFFFF;
     font-weight: bold;
     cursor: pointer;
+}
+
+.hovered, .selected {
+    color: white;
+    background: gray;
 }
 
 #make-me-drinks {
@@ -45,11 +50,6 @@ button {
 #make-me-drinks:hover, #edit-ingredients:hover, #select-all:hover {
     color: white;
     background-color: gray;
-}
-
-.selected {
-    color: #FFFFFF;
-    background: gray;
 }
 
 .more-info-btn {
