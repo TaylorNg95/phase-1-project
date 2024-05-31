@@ -1,10 +1,8 @@
-# Phase 1 Project
+# Stir Me a Cocktail
+See what you've got, and see what you can make!
 
-This project allows users to select cocktail ingredients that they have or plan to buy. Based on this information, the program renders all possible drinks that the user can make with those given ingredients. This relies on TheCocktailDB API (https://www.thecocktaildb.com/api.php), particularly their alphabetized cocktail data (https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a). Ingredients are housed within drink objects, so the program relies on the following steps:
-    - Fetch the data with a recursive function (called 26 times) to get alphabetized drinks
-    - Load the drink objects into a global drinks array
-    - Load the ingredients within those drink objects into a global ingredients array (without repeat)
-    - Render the ingredients as alphabetized, clickable buttons on the home page
-    - Accept a user-based list of ingredients when the 'make me a drink' button is clicked
-    - Compare the user ingredients to those required to make each drink in the global drinks array
-    - Render the matching drinks and their details (image, name, ingredients, measurements, and instructions)
+## Description
+This single page application allows users to view and select various cocktail ingredients that they own or plan to buy. Based on these inputs, the program searches for all possible cocktails that the user can make and renders them to individual drink cards. Each drink card contains the drink name, image, and ingredients, as well as the corresponding measurements and instructions. Users have the option to edit their ingredients list and / or select all the ingredients to view all cocktail cards.
+
+## API
+This application utilizes TheCocktailDB API (https://www.thecocktaildb.com/api.php), particularly their alphabetized cocktail data (a.g. https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a). TheCocktailDB is an external API that allows developers to use a test API key "1" during development or for educational use.
