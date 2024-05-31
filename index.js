@@ -12,7 +12,9 @@ const cardsContainer = document.querySelector('#cards-container')
 const makeDrinksBtn = document.querySelector('#make-drinks')
 const editIngredientsBtn = document.querySelector('#edit-ingredients')
 const selectAllBtn = document.querySelector('#select-all')
+
 const searchBar = document.querySelector('#search-bar')
+const searchInput = document.querySelector('#searchInput')
 
 // Get all drink objects loaded into global variable allDrinksArray
 
@@ -41,13 +43,19 @@ function populateAllDrinksArray(data){
         allDrinksArray.forEach(drink => {
             extractIngredients(drink) // Once allDrinksArray fully loaded, extract ingredients from each drink object
         })
-        selectAllBtn.classList.remove('hidden')
-        makeDrinksBtn.classList.remove('hidden')
-        searchBar.classList.remove('hidden') // Ensures that the "Select All", "Make Me a Drink", and "Search Bar" are hidden while data is fetched
-        document.querySelector('#loading-img').style.display = 'none'
-        renderIngredients()
+        displayMainContent()
     }
 }
+
+function displayMainContent(){
+    selectAllBtn.classList.remove('hidden')
+    makeDrinksBtn.classList.remove('hidden')
+    searchBar.classList.remove('hidden') // Ensures that the "Select All", "Make Me a Drink", and "Search Bar" are hidden while data is fetched
+    document.querySelector('#loading-img').style.display = 'none'
+    renderIngredients()
+    removeAllFadeIns() // Ensures that button fade-in effects only occur once
+}
+
 
 // Max of 15 ingredients per drink. Extract these as variables and create an ingredients Obj for each drink.
 
@@ -111,6 +119,7 @@ function clearCardsContainer(){
 editIngredientsBtn.addEventListener('click', function(e){
     toggleHidden(makeDrinksBtn)
     togglePageDisplay(e)
+    searchInput.reset()
 })
 
 function togglePageDisplay(e){
@@ -199,6 +208,17 @@ function renderDrink(drink, drinkIngArray, drinkMeasArray){
     cardsContainer.appendChild(div1)
 }
 
+function removeAllFadeIns(){
+    document.querySelector('h1').classList.remove('fade-in-1')
+    document.querySelector('h2').classList.remove('fade-in-2')
+    setTimeout(() => {
+        document.querySelectorAll('#btn-container button').forEach(btn => btn.classList.remove('fade-in-1'))
+        selectAllBtn.classList.remove('fade-in-1')
+        makeDrinksBtn.classList.remove('fade-in-1')
+        searchBar.classList.remove('fade-in-1')
+    }, 4000) // Ensures fade-in effects only happen once and are removed after page is rendered
+}
+
 selectAllBtn.addEventListener('click', function(e){
     const buttons = document.querySelectorAll('#btn-container button') 
     this.textContent = this.textContent === 'Select All Ingredients' ? 'Unselect All Ingredients' : 'Select All Ingredients'
@@ -207,7 +227,7 @@ selectAllBtn.addEventListener('click', function(e){
     })
 })
 
-document.querySelector('#searchInput').addEventListener('keyup', function(){
+searchInput.addEventListener('keyup', function(){
     const filter = this.value.toLowerCase()
     const buttons = document.querySelectorAll('#btn-container button')
 

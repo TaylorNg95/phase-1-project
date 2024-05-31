@@ -6,7 +6,6 @@ body {
 h1 {
     text-align: center;
     color: gray;
-    opacity: 0;
 }
 
 @keyframes FadeIn1 {
@@ -52,7 +51,7 @@ h2 {
 .form-group {
     display: inline;
     float: right;
-    width: 25%;
+    width: 20%;
     margin-right: 5%;
 }
 
